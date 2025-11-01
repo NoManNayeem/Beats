@@ -1,0 +1,89 @@
+name: EAS Build (Alternative)
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build'
+        required: true
+        type: choice
+        options:
+          - android
+          - ios
+          - all
+      profile:
+        description: 'Build profile'
+        required: true
+        type: choice
+        options:
+          - preview
+          - production
+
+env:
+  EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+jobs:
+  build:
+    name: Build with EAS
+    runs-on: ubuntu-latest
+    if: github.event.inputs.platform == 'android' || github.event.inputs.platform == 'all'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Install dependencies
+        working-directory: ./beats
+        run: npm ci
+
+      - name: Configure EAS
+        working-directory: ./beats
+        run: |
+          eas build:configure
+
+      - name: Build Android
+        working-directory: ./beats
+        run: |
+          eas build --platform android --profile ${{ github.event.inputs.profile }} --non-interactive
+
+  build-ios:
+    name: Build iOS with EAS
+    runs-on: macos-latest
+    if: github.event.inputs.platform == 'ios' || github.event.inputs.platform == 'all'
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Install dependencies
+        working-directory: ./beats
+        run: npm ci
+
+      - name: Configure EAS
+        working-directory: ./beats
+        run: |
+          eas build:configure
+
+      - name: Build iOS
+        working-directory: ./beats
+        run: |
+          eas build --platform ios --profile ${{ github.event.inputs.profile }} --non-interactive
+
