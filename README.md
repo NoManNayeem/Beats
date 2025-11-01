@@ -1,50 +1,164 @@
-# Welcome to your Expo app 👋
+# 🎵 Beats - Offline-First Media Player
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Your media, always ready.**
 
-## Get started
+Beats is a modern, offline-first media player app built with Expo SDK 54 (2025), React Native, and TypeScript. It automatically detects all audio and video files on your device, organizes them folder-wise, and provides full offline playback with background audio support.
 
-1. Install dependencies
+## ✨ Features
 
+### 🎧 Core Features
+- **📁 Folder-Based Organization** - Automatically organizes media by folders with audio/video counts
+- **🎵 Audio Player** - Full-featured audio playback with seek, shuffle, repeat modes, and background playback
+- **🎬 Video Player** - Full-screen video playback with Picture-in-Picture (PiP) support
+- **📱 Mini Player** - Always-visible mini player with quick controls
+- **🔍 Global Search** - Search across all media files and folders
+- **❤️ Favorites** - Quick access to your favorite media
+- **📋 Playlists** - Create and manage custom playlists
+- **🌓 Theme Support** - Light, dark, and auto theme modes
+- **⚡ Offline-First** - Works completely offline, no internet required
+
+### 🎨 User Experience
+- Clean, minimal folder-based UI
+- Smooth animations and transitions
+- Quick actions (long press for options)
+- Multi-select for bulk operations
+- Recently played media
+- Swipe gestures for navigation
+- Customizable sorting options
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+ and npm
+- Expo CLI (`npm install -g expo-cli`)
+- iOS Simulator (Mac) or Android Studio (for emulator)
+- Physical device with Expo Go app (for testing)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd beats
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. **Start the development server**
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Run on device/simulator**
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Scan QR code with Expo Go app (for physical devices)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Development Build (Required for Media Library)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Since Beats uses native modules (`expo-media-library`, `expo-audio`, `expo-video`), you'll need to create a development build:
 
 ```bash
-npm run reset-project
+# For iOS
+npx expo run:ios
+
+# For Android
+npx expo run:android
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📱 Platform Requirements
 
-## Learn more
+### iOS
+- iOS 13.0+
+- Permissions: Media Library Access
 
-To learn more about developing your project with Expo, look at the following resources:
+### Android
+- Android 8.0+ (API 26+)
+- Permissions: READ_EXTERNAL_STORAGE, READ_MEDIA_AUDIO, READ_MEDIA_VIDEO
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🏗️ Tech Stack
 
-## Join the community
+- **Framework:** Expo SDK 54 (2025)
+- **React Native:** 0.81.5
+- **Language:** TypeScript
+- **Routing:** Expo Router (file-based routing)
+- **State Management:** React Context API
+- **Database:** SQLite (expo-sqlite)
+- **Audio:** expo-audio
+- **Video:** expo-video
+- **Media Library:** expo-media-library
+- **Storage:** AsyncStorage
 
-Join our community of developers creating universal apps.
+## 📂 Project Structure
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+beats/
+├── app/                  # Expo Router pages
+│   ├── (tabs)/          # Tab navigation screens
+│   ├── folder/          # Folder detail screen
+│   ├── player/          # Audio/video player screens
+│   └── playlist/        # Playlist detail screen
+├── components/          # Reusable React components
+│   ├── media/           # Media-related components
+│   ├── player/          # Player-related components
+│   ├── permissions/     # Permission handling
+│   └── ui/              # UI components
+├── context/             # React Context providers
+│   ├── PlayerContext.tsx
+│   └── ThemeContext.tsx
+├── services/            # Business logic services
+│   ├── AudioService.ts
+│   ├── MediaScanner.ts
+│   └── StorageService.ts
+├── types/               # TypeScript type definitions
+├── constants/           # App constants (theme, media types)
+├── utils/               # Utility functions
+└── database/            # Database schemas
+
+```
+
+## 🎯 Key Features Explained
+
+### Offline-First Architecture
+- All media detection happens locally
+- SQLite database for playlists, favorites, and recently played
+- No network calls required for core functionality
+
+### Media Detection
+- Automatically scans device storage for audio/video files
+- Organizes by folder/album structure
+- Supports common formats (MP3, MP4, M4A, WAV, MKV, AVI, etc.)
+
+### Background Playback
+- Audio continues playing when app is in background
+- Media controls in notification center
+- Proper audio session management
+
+## 🔧 Configuration
+
+### App Configuration (`app.json`)
+- iOS background modes enabled for audio
+- Android permissions configured
+- Media library plugin configured with granular permissions
+
+### Environment Variables
+No environment variables required for basic functionality.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📧 Contact
+
+For questions or support, please open an issue on GitHub.
+
+---
+
+**Built with ❤️ using Expo SDK 54 (2025)**

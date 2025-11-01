@@ -9,7 +9,14 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Beats needs access to your photos to scan for media files.",
+        "NSPhotoLibraryAddUsageDescription": "Beats needs access to save media files.",
+        "NSAppleMusicUsageDescription": "Beats needs access to your music library to scan for audio files.",
+        "UIBackgroundModes": ["audio"]
+      },
+      "bundleIdentifier": "com.anonymous.beats"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,8 +25,17 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_MEDIA_AUDIO",
+        "READ_MEDIA_VIDEO",
+        "READ_MEDIA_IMAGES",
+        "FOREGROUND_SERVICE"
+      ],
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.beats"
     },
     "web": {
       "output": "static",
@@ -37,6 +53,18 @@
           "dark": {
             "backgroundColor": "#000000"
           }
+        }
+      ],
+      "expo-audio",
+      "expo-video",
+      "expo-sqlite",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Beats needs access to your photos to scan for media files.",
+          "savePhotosPermission": "Beats needs access to save media files.",
+          "isAccessMediaLocationEnabled": true,
+          "granularPermissions": ["photo", "video", "audio"]
         }
       ]
     ],
